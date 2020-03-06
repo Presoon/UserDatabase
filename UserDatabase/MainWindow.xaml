@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserDatabase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="UserDatabase - Kamil Szpak" Height="450" Width="600">
+    <Grid Background="#aaaaaa">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label x:Name="labelHeaderLeft"  Content="Wprowadź lub edytuj dane użytkownika" Margin="10 10 0 0" FontWeight="bold" Grid.Column="0" Grid.Row="0"/>
+        <Label x:Name="labelHeaderRight"  Content="Lista użytkowników" Margin="10 10 0 0" FontWeight="bold" Grid.Column="1" Grid.Row="0"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+            <Label x:Name="labelName" Content="Imię:"/>
+            <TextBox x:Name="textBoxName" Height="23" TextWrapping="Wrap" Margin="3 0 3 10"/>            
+            <Label x:Name="labelNazwisko" Content="Nazwisko:"/>
+            <TextBox x:Name="textBoxNazwisko" Height="23" TextWrapping="Wrap" Margin="3 0 3 10"/>            
+            <Label x:Name="labelWiek" Content="Wiek: 21 "/>
+            <Slider x:Name="sliderWiek" Maximum="100" Minimum="1" TickFrequency="1" ValueChanged="sliderWiek_ValueChanged" SmallChange="1" Value="21" />
+
+            <WrapPanel Margin="0 30 0 0">
+                <Button x:Name="buttonDodaj" Content="Dodaj usera" HorizontalAlignment="Left" Width="150" Margin="11 0" Click="buttonDodaj_Click"/>
+                <Button x:Name="buttonEdytuj" Content="Edytuj usera" HorizontalAlignment="Right" Width="150" Click="buttonEdytuj_Click"/>
+
+            </WrapPanel>
+
+        </StackPanel>
+
+        <ListBox x:Name="listBoxUsers" Grid.Column="1" Grid.Row="1" Margin="10" Background="#ddd" SelectionChanged="listBoxUsers_SelectionChanged"/>
+
+
     </Grid>
 </Window>
