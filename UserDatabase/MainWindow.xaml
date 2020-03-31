@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserDatabase"
         mc:Ignorable="d"
-        Title="UserDatabase - Kamil Szpak" Height="450" Width="600">
+        Title="UserDatabase - Kamil Szpak" Height="450" Width="600" Closing="Window_Closing"
+        >
 
     <Grid Background="#aaaaaa">
         <Grid.ColumnDefinitions>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,6 +15,50 @@ namespace UserDatabase
         public MainWindow()
         {
             InitializeComponent();
+            WczytajPlik();
+        }
+
+        private void WczytajPlik()
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader("database.txt"))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string imie = line.Substring(0, line.IndexOf(' '));
+                        string nazwisko = line.Substring(line.IndexOf(' ') + 1, line.IndexOf(',') - line.IndexOf(' ') - 1);
+                        string wiek = line.Substring(line.IndexOf(',') + 1, line.Length - line.IndexOf(',') - 4); ;
+                        listBoxUsers.Items.Add($"{imie} {nazwisko},{wiek}lat");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message);
+            }
+        }
+
+        private void ZapiszPlik()
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter("database.txt"))
+                {
+                    string line;
+                    int nmbr = listBoxUsers.Items.Count;
+                    for (int i = 0; i < nmbr; i++)
+                    {
+                        sw.WriteLine(listBoxUsers.Items.GetItemAt(i).ToString());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message);
+                throw;
+            }
         }
 
         private void sliderWiek_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -70,6 +115,9 @@ namespace UserDatabase
             selection = -1;
         }
 
-
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ZapiszPlik();
+        }
     }
 }
